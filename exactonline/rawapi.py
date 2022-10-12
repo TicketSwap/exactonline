@@ -12,7 +12,7 @@ import sys
 
 from time import sleep, time
 
-from .http import HTTPError, Options, opt_secure, http_req, binquote, urljoin
+from .http import HTTPError, Options, opt_secure, http_req, urljoin
 
 
 logger = logging.getLogger(__name__)
@@ -138,8 +138,8 @@ class ExactRawApi(object):
     def create_auth_request_url(self):
         # Build the URLs manually so we get consistent order.
         auth_params = {
-            'client_id': binquote(self.storage.get_client_id()),
-            'redirect_uri': binquote(self.storage.get_response_url()),
+            'client_id': self.storage.get_client_id(),
+            'redirect_uri': self.storage.get_response_url(),
             'response_type': 'code',  # or 'token' for JS apps
         }
         auth_data = ('client_id=%(client_id)s'
@@ -155,11 +155,11 @@ class ExactRawApi(object):
         logger.debug('Requesting a new token')
         # Build the URLs manually so we get consistent order.
         token_params = {
-            'client_id': binquote(self.storage.get_client_id()),
-            'client_secret': binquote(self.storage.get_client_secret()),
-            'code': binquote(code),
+            'client_id': self.storage.get_client_id(),
+            'client_secret': self.storage.get_client_secret(),
+            'code': code,
             'grant_type': 'authorization_code',
-            'redirect_uri': binquote(self.storage.get_response_url()),
+            'redirect_uri': self.storage.get_response_url(),
         }
         token_data = ('client_id=%(client_id)s'
                       '&client_secret=%(client_secret)s'
@@ -187,10 +187,10 @@ class ExactRawApi(object):
 
         # Build the URLs manually so we get consistent order.
         refresh_params = {
-            'client_id': binquote(self.storage.get_client_id()),
-            'client_secret': binquote(self.storage.get_client_secret()),
+            'client_id': self.storage.get_client_id(),
+            'client_secret': self.storage.get_client_secret(),
             'grant_type': 'refresh_token',
-            'refresh_token': binquote(self.storage.get_refresh_token()),
+            'refresh_token': self.storage.get_refresh_token(),
         }
         refresh_data = ('client_id=%(client_id)s'
                         '&client_secret=%(client_secret)s'
