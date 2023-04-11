@@ -9,6 +9,7 @@ Copyright (C) 2015-2021 Walter Doekes, OSSO B.V.
 import json
 import logging
 import sys
+import urllib
 
 from time import sleep, time
 
@@ -190,7 +191,7 @@ class ExactRawApi(object):
             'client_id': self.storage.get_client_id(),
             'client_secret': self.storage.get_client_secret(),
             'grant_type': 'refresh_token',
-            'refresh_token': self.storage.get_refresh_token(),
+            'refresh_token': urllib.parse.unquote(self.storage.get_refresh_token()),
         }
         refresh_data = ('client_id=%(client_id)s'
                         '&client_secret=%(client_secret)s'
