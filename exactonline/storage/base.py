@@ -132,13 +132,13 @@ class ExactOnlineConfig(object):
             'transient', 'access_expiry', '0'))
 
     def set_access_expiry(self, value):
-        self.set('transient', 'access_expiry', native_string(value))
+        self.set('transient', 'access_expiry', value)
 
     def get_access_token(self):
-        return native_string(self.get('transient', 'access_token'))
+        return self.get('transient', 'access_token')
 
     def set_access_token(self, value):
-        self.set('transient', 'access_token', native_string(value))
+        self.set('transient', 'access_token', value)
 
     def get_code(self):
         return native_string(self.get('transient', 'code'))
@@ -150,13 +150,13 @@ class ExactOnlineConfig(object):
         return int(self.get('transient', 'division'))
 
     def set_division(self, value):
-        self.set('transient', 'division', native_string(value))
+        self.set('transient', 'division', value)
 
     def get_refresh_token(self):
-        return native_string(self.get('transient', 'refresh_token'))
+        return self.get('transient', 'refresh_token')
 
     def set_refresh_token(self, value):
-        self.set('transient', 'refresh_token', native_string(value))
+        self.set('transient', 'refresh_token', value)
 
     # ; aliases
 
